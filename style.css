@@ -7,19 +7,52 @@
 :root {
   /* COLORS */
   --bg-color: #e4ccde;
+  --shadow: 9.91px 9.91px 15px #cfbaca, -9.91px -9.91px 15px #f9def2;
+
+  /* sizes */
+  --padding: 32px;
+  --twice-padding: calc(var(--padding) * 2);
 }
 
 body {
-  height: 100vh;
   background-color: var(--bg-color);
-  overflow: hidden;
+}
+
+.container {
+  display: grid;
+  gap: var(--padding);
+  grid-template-rows: 100px 1fr;
+  margin: 0 auto;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 1200px;
+  padding: var(--padding) var(--twice-padding);
 }
 
 h1 {
+  height: 100px;
+  padding-top: 2px;
+
   color: #e4ccde;
-  text-shadow: 2px 2px 4px #90818c, -2px -2px 4px #ffffff;
+  text-shadow: 2px 2px 2px #90818c, -2px -2px 2px #fff3ff;
   text-align: center;
   text-transform: uppercase;
   font-size: 80px;
   font-family: "Fragment Mono", monospace;
+
+  border-radius: 10px;
+  background: var(--bg-color);
+  box-shadow: var(--shadow);
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--padding);
+}
+
+section {
+  border-radius: 10px;
+  background: var(--bg-color);
+  box-shadow: var(--shadow);
 }
