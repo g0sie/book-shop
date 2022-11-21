@@ -23,6 +23,66 @@
   --half-padding: calc(var(--padding) / 2);
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 0 10px 10px 0;
+  background: var(--bg-color);
+  box-shadow: var(--shadow-inset);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0 10px 10px 0;
+  background: var(--text-color-light);
+}
+
+button {
+  color: var(--text-color-dark);
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+
+  background: var(--bg-color);
+  box-shadow: var(--small-shadow);
+
+  border: none;
+  cursor: pointer;
+}
+
+button:active {
+  box-shadow: var(--small-shadow-inset);
+}
+
+.exit {
+  position: relative;
+
+  height: 20px;
+  width: 20px;
+
+  cursor: pointer;
+}
+
+.exit .line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+
+  height: 2px;
+  width: 20px;
+  background-color: var(--bg-color);
+  rotate: 45deg;
+}
+
+.exit .line:nth-child(2) {
+  rotate: -45deg;
+}
+
+.exit:hover .line {
+  background-color: white;
+}
+
 body {
   background-color: var(--bg-color);
   font-family: "Poppins", sans-serif;
@@ -76,19 +136,12 @@ section h2 {
   font-weight: 500;
 }
 
-section::-webkit-scrollbar {
-  width: 10px;
-}
-
 section::-webkit-scrollbar-track {
   border-radius: 0 10px 10px 0;
-  background: var(--bg-color);
-  box-shadow: var(--shadow-inset);
 }
 
 section::-webkit-scrollbar-thumb {
   border-radius: 0 10px 10px 0;
-  background: var(--text-color-light);
 }
 
 .book-catalog .book {
@@ -132,21 +185,8 @@ section::-webkit-scrollbar-thumb {
 }
 
 .book-catalog .book .info button {
-  color: var(--text-color-dark);
-  font-weight: 500;
-  font-family: "Poppins", sans-serif;
-
-  background: var(--bg-color);
-  box-shadow: var(--small-shadow);
   margin-top: 5px;
   flex-basis: var(--padding);
-
-  border: none;
-  cursor: pointer;
-}
-
-.book-catalog .book .info button:active {
-  box-shadow: var(--small-shadow-inset);
 }
 
 .popup {
@@ -172,33 +212,98 @@ section::-webkit-scrollbar-thumb {
   position: absolute;
   top: var(--padding);
   right: var(--padding);
-  height: 20px;
-  width: 20px;
-
-  cursor: pointer;
-}
-
-.popup .exit .line {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
-
-  height: 2px;
-  width: 20px;
-  background-color: var(--bg-color);
-  rotate: 45deg;
-}
-
-.popup .exit .line:nth-child(2) {
-  rotate: -45deg;
-}
-
-.popup .exit:hover .line {
-  background-color: white;
 }
 
 .popup .description {
   margin-right: var(--padding);
   margin-top: var(--padding);
+}
+
+section.order-book {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-book .bag {
+  flex-grow: 1;
+
+  margin-top: var(--half-padding);
+  padding: var(--half-padding);
+  box-shadow: var(--shadow-inset);
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  overflow: auto;
+}
+
+.order-book .book {
+  position: relative;
+  color: var(--text-color-dark);
+  border-top: 1px solid var(--text-color-light);
+  padding: 15px 50px 15px 60px;
+}
+
+.order-book .book:nth-child(1) {
+  border: none;
+}
+
+.order-book .price {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  left: var(--half-padding);
+  font-weight: 500;
+}
+
+.order-book .title {
+  font-weight: 500;
+}
+
+.order-book .author {
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.order-book .exit {
+  position: absolute;
+  top: 50%;
+  right: var(--half-padding);
+  translate: 0 -50%;
+}
+
+.order-book .exit .line {
+  background-color: var(--text-color-light);
+}
+
+.order-book .exit:hover .line {
+  background-color: var(--text-color-dark);
+}
+
+.order-book .summary {
+  height: 80px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-top: 2px solid var(--text-color-light);
+  padding-top: var(--half-padding);
+  padding-left: var(--padding);
+  padding-right: var(--padding);
+  margin-top: var(--half-padding);
+  background-color: var(--bg-color);
+
+  color: var(--text-color-dark);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.order-book .summary button {
+  padding: 0 var(--half-padding) 0;
+  height: var(--padding);
+  font-size: 17px;
 }

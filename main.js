@@ -111,9 +111,14 @@ const popup = document.createElement("div");
 popup.className = "popup";
 const popupFragment = new DocumentFragment();
 
-const exitPopup = document.createElement("div");
-exitPopup.className = "exit";
-exitPopup.innerHTML = '<div class="line"></div><div class="line"></div>';
+const exitButton = () => {
+  const button = document.createElement("div");
+  button.className = "exit";
+  button.innerHTML = '<div class="line"></div><div class="line"></div>';
+  return button;
+};
+
+const exitPopup = exitButton();
 exitPopup.onclick = () => popup.classList.remove("active");
 popupFragment.append(exitPopup);
 
@@ -176,6 +181,7 @@ books.forEach((book) => {
   const addToBag = document.createElement("button");
   addToBag.className = "add-to-bag";
   addToBag.innerText = "Add to bag";
+  addToBag.onclick = () => addBookToBag(book);
   infoFragment.append(addToBag);
 
   info.append(infoFragment);
@@ -188,13 +194,71 @@ bookCatalog.append(bookCatalogFragment);
 mainFragment.append(bookCatalog);
 
 // ORDER BOOK SECTION
+const bag = [];
+let total = 0;
+
 const orderBook = document.createElement("section");
+const orderBookFragment = new DocumentFragment();
 orderBook.className = "order-book";
-mainFragment.append(orderBook);
 
 const h2OrderBook = document.createElement("h2");
-h2OrderBook.append("Order Book");
-orderBook.append(h2OrderBook);
+h2OrderBook.innerText = "Order Book";
+orderBookFragment.append(h2OrderBook);
 
+const bagElement = document.createElement("div");
+const bagFragment = new DocumentFragment();
+bagElement.className = "bag";
+
+const addBookToBag = (book) => {
+  bag.push(book);
+  total += book.price;
+  totalElement.innerText = total + "$";
+
+  const bookInBag = document.createElement("div");
+  bookInBag.className = "book";
+  const bookFragment = new DocumentFragment();
+
+  const author = document.createElement("p");
+  author.className = "author";
+  author.innerText = book.author;
+  bookFragment.append(author);
+
+  const title = document.createElement("p");
+  title.className = "title";
+  title.innerText = book.title;
+  bookFragment.append(title);
+
+  const price = document.createElement("p");
+  price.className = "price";
+  price.innerText = "$" + book.price;
+  bookFragment.append(price);
+
+  const deleteButton = exitButton();
+  deleteButton.onclick = () => {
+    bag.splice(bag.indexOf(book), 1);
+    bookInBag.remove();
+    total -= book.price;
+    totalElement.innerText = total + "$";
+  };
+  bookFragment.append(deleteButton);
+
+  bookInBag.append(bookFragment);
+  bagFragment.append(bookInBag);
+  bagElement.append(bagFragment);
+};
+orderBookFragment.append(bagElement);
+
+const summary = document.createElement("div");
+summary.className = "summary";
+summary.innerHTML = "<button>Confirm order</button>";
+
+const totalElement = document.createElement("p");
+totalElement.className = "total";
+totalElement.innerText = total + "$";
+summary.prepend(totalElement);
+orderBookFragment.append(summary);
+
+orderBook.append(orderBookFragment);
+mainFragment.append(orderBook);
 main.append(mainFragment);
 container.append(containerFragment);
