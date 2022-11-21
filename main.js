@@ -103,7 +103,26 @@ h1.append("book shop");
 containerFragment.append(h1);
 
 const main = document.createElement("main");
+const mainFragment = new DocumentFragment();
 containerFragment.append(main);
+
+// POPUP
+const popup = document.createElement("div");
+popup.className = "popup";
+const popupFragment = new DocumentFragment();
+
+const exitPopup = document.createElement("div");
+exitPopup.className = "exit";
+exitPopup.innerHTML = '<div class="line"></div><div class="line"></div>';
+exitPopup.onclick = () => popup.classList.remove("active");
+popupFragment.append(exitPopup);
+
+const popupDescription = document.createElement("p");
+popupDescription.className = "description";
+popupFragment.append(popupDescription);
+
+popup.append(popupFragment);
+containerFragment.append(popup);
 
 // BOOK CATALOG SECTION
 const bookCatalog = document.createElement("section");
@@ -111,48 +130,71 @@ bookCatalog.className = "book-catalog";
 const bookCatalogFragment = new DocumentFragment();
 
 const h2BookCatalog = document.createElement("h2");
-h2BookCatalog.append("Book Catalog");
-bookCatalog.append(h2BookCatalog);
+h2BookCatalog.innerText = "Book Catalog";
+bookCatalogFragment.append(h2BookCatalog);
 
 books.forEach((book) => {
-  const div = document.createElement("div");
-  div.className = "book";
+  const bookDiv = document.createElement("div");
+  const bookFragment = new DocumentFragment();
+  bookDiv.className = "book";
 
   const image = document.createElement("div");
   image.className = "cover";
   image.style.backgroundImage = `url(${book.imageLink})`;
-  div.append(image);
+  bookFragment.append(image);
 
   const info = document.createElement("div");
+  const infoFragment = new DocumentFragment();
   info.className = "info";
-  div.append(info);
 
   const author = document.createElement("p");
   author.className = "author";
   author.innerText = book.author;
-  info.append(author);
+  infoFragment.append(author);
 
   const title = document.createElement("h3");
   title.innerText = book.title;
-  info.append(title);
+  infoFragment.append(title);
 
   const price = document.createElement("p");
+  price.className = "price";
   price.innerText = `Price: $${book.price}`;
-  info.append(price);
+  infoFragment.append(price);
 
-  bookCatalogFragment.append(div);
+  const showMore = document.createElement("button");
+  showMore.className = "show-more";
+  showMore.innerText = "Show more";
+  showMore.onclick = (event) => {
+    if (!popup.classList.contains("active")) popup.classList.add("active");
+    popupDescription.innerText = book.description;
+    const rect = popup.getBoundingClientRect();
+    popup.style.top = `min(100vh - ${rect.height}px, ${event.pageY}px)`;
+    popup.style.left = `min(100% - ${rect.width}px, ${event.pageX}px)`;
+  };
+  infoFragment.append(showMore);
+
+  const addToBag = document.createElement("button");
+  addToBag.className = "add-to-bag";
+  addToBag.innerText = "Add to bag";
+  infoFragment.append(addToBag);
+
+  info.append(infoFragment);
+  bookFragment.append(info);
+  bookDiv.append(bookFragment);
+  bookCatalogFragment.append(bookDiv);
 });
 
 bookCatalog.append(bookCatalogFragment);
-main.append(bookCatalog);
+mainFragment.append(bookCatalog);
 
 // ORDER BOOK SECTION
 const orderBook = document.createElement("section");
 orderBook.className = "order-book";
-main.append(orderBook);
+mainFragment.append(orderBook);
 
 const h2OrderBook = document.createElement("h2");
 h2OrderBook.append("Order Book");
 orderBook.append(h2OrderBook);
 
+main.append(mainFragment);
 container.append(containerFragment);

@@ -7,13 +7,15 @@
 :root {
   /* COLORS */
   --bg-color: #b5c99a;
-  --text-color: #718355;
+  --text-color-dark: #414833;
+  --text-color-light: #718355;
 
   /* SHADOWS */
   --shadow: 9.91px 9.91px 15px #a5b78c, -9.91px -9.91px 15px #c5dba8;
   --shadow-inset: inset 9.91px 9.91px 15px #a5b78c,
     inset -9.91px -9.91px 15px #c5dba8;
-  --text-shadow: 2px 2px 2px #a5b78c, -2px -2px 2px #c5dba8;
+  --small-shadow: 2px 2px 2px #a5b78c, -2px -2px 2px #c5dba8;
+  --small-shadow-inset: inset 2px 2px 2px #a5b78c, inset -2px -2px 2px #c5dba8;
 
   /* sizes */
   --padding: 32px;
@@ -35,7 +37,7 @@ body {
   width: 100%;
   max-width: 1200px;
   padding: var(--padding) var(--twice-padding);
-  color: var(--text-color);
+  color: var(--text-color-light);
 }
 
 h1 {
@@ -44,7 +46,7 @@ h1 {
   align-items: center;
   justify-content: center;
 
-  text-shadow: var(--text-shadow);
+  text-shadow: var(--small-shadow);
   text-align: center;
   text-transform: uppercase;
   font-size: 80px;
@@ -70,7 +72,7 @@ section {
 
 section h2 {
   text-align: center;
-  text-shadow: var(--text-shadow);
+  text-shadow: var(--small-shadow);
   font-weight: 500;
 }
 
@@ -86,7 +88,7 @@ section::-webkit-scrollbar-track {
 
 section::-webkit-scrollbar-thumb {
   border-radius: 0 10px 10px 0;
-  background: var(--text-color);
+  background: var(--text-color-light);
 }
 
 .book-catalog .book {
@@ -107,9 +109,96 @@ section::-webkit-scrollbar-thumb {
 }
 
 .book-catalog .book .info {
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 20px;
+  color: var(--text-color-dark);
+}
+
+.book-catalog .book .info .author {
+  font-size: 15px;
+  font-weight: 400;
 }
 
 .book-catalog .book .info h3 {
   font-size: 18px;
+  font-weight: 600;
+}
+
+.book-catalog .book .info .price {
+  font-size: 16px;
+  flex-grow: 1;
+}
+
+.book-catalog .book .info button {
+  color: var(--text-color-dark);
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+
+  background: var(--bg-color);
+  box-shadow: var(--small-shadow);
+  margin-top: 5px;
+  flex-basis: var(--padding);
+
+  border: none;
+  cursor: pointer;
+}
+
+.book-catalog .book .info button:active {
+  box-shadow: var(--small-shadow-inset);
+}
+
+.popup {
+  display: none;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 500px;
+  background-color: var(--text-color-light);
+  border-radius: 10px;
+}
+
+.popup.active {
+  display: block;
+
+  color: var(--bg-color);
+  padding: var(--padding);
+}
+
+.popup .exit {
+  position: absolute;
+  top: var(--padding);
+  right: var(--padding);
+  height: 20px;
+  width: 20px;
+
+  cursor: pointer;
+}
+
+.popup .exit .line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+
+  height: 2px;
+  width: 20px;
+  background-color: var(--bg-color);
+  rotate: 45deg;
+}
+
+.popup .exit .line:nth-child(2) {
+  rotate: -45deg;
+}
+
+.popup .exit:hover .line {
+  background-color: white;
+}
+
+.popup .description {
+  margin-right: var(--padding);
+  margin-top: var(--padding);
 }
