@@ -6,16 +6,24 @@
 
 :root {
   /* COLORS */
-  --bg-color: #e4ccde;
-  --shadow: 9.91px 9.91px 15px #cfbaca, -9.91px -9.91px 15px #f9def2;
+  --bg-color: #b5c99a;
+  --text-color: #718355;
+
+  /* SHADOWS */
+  --shadow: 9.91px 9.91px 15px #a5b78c, -9.91px -9.91px 15px #c5dba8;
+  --shadow-inset: inset 9.91px 9.91px 15px #a5b78c,
+    inset -9.91px -9.91px 15px #c5dba8;
+  --text-shadow: 2px 2px 2px #a5b78c, -2px -2px 2px #c5dba8;
 
   /* sizes */
   --padding: 32px;
   --twice-padding: calc(var(--padding) * 2);
+  --half-padding: calc(var(--padding) / 2);
 }
 
 body {
   background-color: var(--bg-color);
+  font-family: "Poppins", sans-serif;
 }
 
 .container {
@@ -27,27 +35,26 @@ body {
   width: 100%;
   max-width: 1200px;
   padding: var(--padding) var(--twice-padding);
+  color: var(--text-color);
 }
 
 h1 {
   height: 100px;
-  padding-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  color: #e4ccde;
-  text-shadow: 2px 2px 2px #90818c, -2px -2px 2px #fff3ff;
+  text-shadow: var(--text-shadow);
   text-align: center;
   text-transform: uppercase;
   font-size: 80px;
-  font-family: "Fragment Mono", monospace;
-
-  border-radius: 10px;
-  background: var(--bg-color);
-  box-shadow: var(--shadow);
+  font-weight: 600;
 }
 
 main {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  height: calc(100vh - 100px - 3 * var(--padding));
   gap: var(--padding);
 }
 
@@ -55,4 +62,54 @@ section {
   border-radius: 10px;
   background: var(--bg-color);
   box-shadow: var(--shadow);
+
+  padding: var(--half-padding);
+
+  overflow: auto;
+}
+
+section h2 {
+  text-align: center;
+  text-shadow: var(--text-shadow);
+  font-weight: 500;
+}
+
+section::-webkit-scrollbar {
+  width: 10px;
+}
+
+section::-webkit-scrollbar-track {
+  border-radius: 0 10px 10px 0;
+  background: var(--bg-color);
+  box-shadow: var(--shadow-inset);
+}
+
+section::-webkit-scrollbar-thumb {
+  border-radius: 0 10px 10px 0;
+  background: var(--text-color);
+}
+
+.book-catalog .book {
+  height: 320px;
+  margin-top: var(--half-padding);
+  background: var(--bg-color);
+  border-radius: 10px;
+  box-shadow: var(--shadow-inset);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.book-catalog .book .cover {
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px 0 0 10px;
+}
+
+.book-catalog .book .info {
+  padding: 10px;
+}
+
+.book-catalog .book .info h3 {
+  font-size: 18px;
 }
