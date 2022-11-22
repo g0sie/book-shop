@@ -68,14 +68,14 @@
           <div class="payment">
             <label for="payment">Payment type</label><br />
             <input type="radio" id="cash" name="payment" checked />
-            <label for="cash">Cash</label>
+            <label for="cash">Cash</label><br />
             <input type="radio" id="card" name="payment" />
             <label for="card">Card</label>
           </div>
-          <div class="gifts">
+          <div class="gifts valid">
             <label for="gift">Choose 2 gifts</label><br />
             <input type="checkbox" name="gift" id="pack" />
-            <label for="gift">Pack as gift</label><br />
+            <label for="pack">Pack as gift</label><br />
             <input type="checkbox" name="gift" id="postcard" />
             <label for="postcard">Add postcard</label><br />
             <input type="checkbox" name="gift" id="discount" />
@@ -83,8 +83,9 @@
             ><br />
             <input type="checkbox" name="gift" id="pen" />
             <label for="pen">Branded pen or pencil</label>
+            <p id="error-msg-gifts" class="error-msg"></p>
           </div>
-          <button type="submit" disabled>Complete</button>
+          <button id="complete" type="button" disabled>Complete</button>
         </aside>
       </form>
     </div>

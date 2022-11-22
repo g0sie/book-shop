@@ -274,7 +274,18 @@ mainFragment.append(orderBook);
 main.append(mainFragment);
 container.append(containerFragment);
 
-const form = document.getElementById("form");
+// FORM
+
+const handleEmptyInputs = (event) => {
+  const elem = event.target;
+  if (elem.value === "") {
+    elem.className = "invalid";
+    elem.nextElementSibling.innerText = "This field can't be empty";
+  }
+};
+
+const leftInputs = document.querySelectorAll("form .left input");
+leftInputs.forEach((input) => (input.onblur = handleEmptyInputs));
 
 const handleName = (event) => {
   const val = event.target.value.trim();
@@ -291,6 +302,7 @@ const handleName = (event) => {
     inputName.className = "valid";
     nameError.innerText = "";
   }
+  handleCompleteButton();
 };
 const inputName = document.getElementById("name");
 const nameError = document.getElementById("error-msg-name");
@@ -311,6 +323,7 @@ const handleSurname = (event) => {
     inputSurname.className = "valid";
     surnameError.innerText = "";
   }
+  handleCompleteButton();
 };
 const inputSurname = document.getElementById("surname");
 const surnameError = document.getElementById("error-msg-surname");
@@ -320,16 +333,15 @@ const handleDeliveryDate = (event) => {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   tomorrow.setHours(0, 0, 0);
-  console.log(tomorrow);
   const val = new Date(event.target.value);
-  console.log(val);
   if (val < tomorrow) {
     inputDate.className = "invalid";
-    dateError.innerText = "The earliest delivery time can be tomorrow";
+    dateError.innerText = "The earliest possible date is tomorrow";
   } else {
     inputDate.className = "valid";
     dateError.innerText = "";
   }
+  handleCompleteButton();
 };
 const inputDate = document.getElementById("date");
 const dateError = document.getElementById("error-msg-date");
@@ -344,6 +356,7 @@ const handleStreet = (event) => {
     inputStreet.className = "valid";
     streetError.innerText = "";
   }
+  handleCompleteButton();
 };
 const inputStreet = document.getElementById("street");
 const streetError = document.getElementById("error-msg-street");
@@ -358,6 +371,7 @@ const handleHouseNumber = (event) => {
     inputHouse.className = "valid";
     houseError.innerText = "";
   }
+  handleCompleteButton();
 };
 const inputHouse = document.getElementById("house");
 const houseError = document.getElementById("error-msg-house");
@@ -365,7 +379,6 @@ inputHouse.oninput = handleHouseNumber;
 
 const handleFlatNumber = (event) => {
   const val = event.target.value;
-  console.log(val);
   if (!/^[1-9]/.test(val)) {
     inputFlat.className = "invalid";
     flateError.innerText = "Must start with a positive number";
@@ -374,12 +387,65 @@ const handleFlatNumber = (event) => {
     flateError.innerText = "Must end with a number";
   } else if (!/^[-0-9]*$/.test(val)) {
     inputFlat.className = "invalid";
-    flateError.innerText = "Only numbers and dashes allowed";
+    flateError.innerText = "Only numbers and dashes are allowed";
   } else {
     inputFlat.className = "valid";
     flateError.innerText = "";
   }
+  handleCompleteButton();
 };
 const inputFlat = document.getElementById("flat");
 const flateError = document.getElementById("error-msg-flat");
 inputFlat.oninput = handleFlatNumber;
+
+const handleGifts = (event) => {
+  const MAX = 2;
+  const errorMsg = document.getElementById("error-msg-gifts");
+  const parent = event.target.parentElement;
+  checkedCount += event.target.checked ? 1 : -1;
+  if (checkedCount > MAX) {
+    parent.classList.replace("valid", "invalid");
+    errorMsg.innerText = "You can choose at most two gifts";
+  } else {
+    parent.classList.replace("invalid", "valid");
+    errorMsg.innerText = "";
+  }
+  handleCompleteButton();
+};
+
+const giftCheckboxes = document.querySelectorAll(".gifts input");
+giftCheckboxes.forEach((checkbox) => (checkbox.oninput = handleGifts));
+let checkedCount = 0;
+
+const isFormValid = () => {
+  return [...leftInputs, giftCheckboxes[0].parentElement].every((elem) =>
+    elem.classList.contains("valid")
+  );
+};
+
+function handleCompleteButton() {
+  const completeButton = document.getElementById("complete");
+  completeButton.disabled = !isFormValid();
+}
+
+const completeButton = document.getElementById("complete");
+completeButton.onclick = () => {
+  const message = document.createElement("div");
+  message.className = "order-completed";
+  message.innerHTML = `
+  <h2>The order created</h2>
+  <p>The delivery address is 
+    <span>
+      ${inputStreet.value} ${inputHouse.value}/${inputFlat.value}
+    </span>
+  </p>
+  <p>Customer
+    <span>${inputName.value} ${inputSurname.value}</span>
+  </p>
+  `;
+  containerFragment.append(message);
+  container.append(containerFragment);
+
+  const form = document.getElementById("form");
+  form.style.display = "none";
+};

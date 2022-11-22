@@ -309,14 +309,8 @@ section.order-book {
   font-size: 17px;
 }
 
-/* h1,
-main {
-  display: none;
-} */
-
 form {
   display: none;
-  /* display: grid; */
   grid-template-columns: 3fr 2fr;
   gap: var(--padding);
   padding: var(--padding);
@@ -374,9 +368,97 @@ form .right > * {
 
 .right button {
   height: var(--padding);
+  box-shadow: var(--shadow);
 }
 
 .right button:disabled {
   box-shadow: var(--small-shadow);
   cursor: default;
+}
+
+.right button:enabled:active {
+  box-shadow: var(--shadow-inset);
+}
+
+form input[type="radio"] {
+  position: relative;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: 1px solid var(--text-color-dark);
+  border-radius: 50%;
+}
+
+form input[type="radio"]::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--text-color-dark);
+  scale: 0;
+  translate: -1px -1px;
+  transition: 0.3s ease-in-out;
+}
+
+form input[type="radio"]:checked::before {
+  scale: 1;
+}
+
+form input[type="checkbox"] {
+  position: relative;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: 1px solid var(--text-color-dark);
+}
+
+form input[type="checkbox"]::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 5px;
+  padding: 0;
+  background-color: var(--text-color-dark);
+  scale: 0;
+  translate: -1px -1px;
+  transition: 0.3s ease-in-out;
+}
+
+form input[type="checkbox"]:checked::before {
+  scale: 1;
+}
+
+.order-completed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--padding);
+  padding: var(--padding);
+
+  height: calc(100vh - var(--twice-padding));
+  box-shadow: var(--shadow);
+  border-radius: 10px;
+  color: var(--text-color-dark);
+
+  overflow: auto;
+}
+
+.order-completed h2 {
+  font-weight: 600;
+}
+
+.order-completed span {
+  font-weight: 600;
 }
