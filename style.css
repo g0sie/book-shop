@@ -307,3 +307,69 @@ section.order-book {
   height: var(--padding);
   font-size: 17px;
 }
+
+/* h1,
+main {
+  display: none;
+} */
+
+form {
+  display: none;
+  /* display: grid; */
+  grid-template-columns: 3fr 2fr;
+  gap: var(--padding);
+  padding: var(--padding);
+
+  height: calc(100vh - var(--twice-padding));
+  box-shadow: var(--shadow);
+  border-radius: 10px;
+  color: var(--text-color-dark);
+
+  overflow: auto;
+}
+
+form .left,
+form .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+form label {
+  margin-top: var(--half-padding);
+}
+
+form input {
+  background-color: #e9f5db;
+  padding: 8px 14px;
+  font-size: 14px;
+  border: 1px solid var(--text-color-light);
+  border-radius: 3px;
+}
+
+form input:focus {
+  outline: 2px solid var(--text-color-light);
+}
+
+form input.invalid {
+  border: 1px solid red;
+}
+
+form .right {
+  gap: 40px;
+  align-items: center;
+}
+
+form .right > * {
+  width: 80%;
+}
+
+.right button {
+  height: var(--padding);
+}
+
+.right button:disabled {
+  box-shadow: var(--small-shadow);
+  cursor: default;
+}

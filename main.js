@@ -92,7 +92,7 @@ const books = [
   },
 ];
 
-const container = document.createElement("div");
+const container = document.getElementById("container");
 container.className = "container";
 document.body.append(container);
 
@@ -249,16 +249,29 @@ const addBookToBag = (book) => {
 orderBookFragment.append(bagElement);
 
 const summary = document.createElement("div");
+const summaryFragment = new DocumentFragment();
 summary.className = "summary";
-summary.innerHTML = "<button>Confirm order</button>";
 
 const totalElement = document.createElement("p");
 totalElement.className = "total";
 totalElement.innerText = total + "$";
-summary.prepend(totalElement);
+summaryFragment.append(totalElement);
+
+const confirmOrder = document.createElement("button");
+confirmOrder.innerHTML = "Confirm order";
+confirmOrder.onclick = () => {
+  main.style.display = "none";
+  h1.style.display = "none";
+  form.style.display = "grid";
+};
+summaryFragment.append(confirmOrder);
+
+summary.append(summaryFragment);
 orderBookFragment.append(summary);
 
 orderBook.append(orderBookFragment);
 mainFragment.append(orderBook);
 main.append(mainFragment);
 container.append(containerFragment);
+
+const form = document.getElementById("form");
