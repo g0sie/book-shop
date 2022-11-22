@@ -25,18 +25,23 @@
             id="name"
             name="name"
             placeholder="Michael"
+            minlength="4"
             required
           />
+          <p class="error-msg" id="error-msg-name"></p>
           <label for="surname">Surname</label>
           <input
             type="text"
             id="surname"
             name="surname"
             placeholder="Scarn"
+            minlength="5"
             required
           />
+          <p class="error-msg" id="error-msg-surname"></p>
           <label for="date">Delivery date</label>
           <input type="date" id="date" name="date" required />
+          <p class="error-msg" id="error-msg-date"></p>
           <label for="street">Street</label>
           <input
             type="text"
@@ -45,17 +50,19 @@
             placeholder="Slough Avenue"
             required
           />
+          <p id="error-msg-street" class="error-msg"></p>
           <label for="house">House number</label>
           <input
-            class="invalid"
             type="number"
             id="house"
             name="house"
             placeholder="172"
             required
           />
+          <p id="error-msg-house" class="error-msg"></p>
           <label for="flat">Flat number</label>
-          <input type="number" id="flat" name="flat" placeholder="5" required />
+          <input type="text" id="flat" name="flat" placeholder="5" required />
+          <p id="error-msg-flat" class="error-msg"></p>
         </div>
         <aside class="right">
           <div class="payment">

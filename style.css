@@ -9,6 +9,7 @@
   --bg-color: #b5c99a;
   --text-color-dark: #414833;
   --text-color-light: #718355;
+  --error: #bc4749;
 
   /* SHADOWS */
   --shadow: 9.91px 9.91px 15px #a5b78c, -9.91px -9.91px 15px #c5dba8;
@@ -308,14 +309,14 @@ section.order-book {
   font-size: 17px;
 }
 
-/* h1,
+h1,
 main {
   display: none;
-} */
+}
 
 form {
-  display: none;
-  /* display: grid; */
+  /* display: none; */
+  display: grid;
   grid-template-columns: 3fr 2fr;
   gap: var(--padding);
   padding: var(--padding);
@@ -353,7 +354,13 @@ form input:focus {
 }
 
 form input.invalid {
-  border: 1px solid red;
+  border: 1px solid var(--error);
+}
+
+form .error-msg {
+  color: var(--error);
+  font-size: 14px;
+  font-weight: 600;
 }
 
 form .right {
