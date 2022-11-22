@@ -309,14 +309,14 @@ section.order-book {
   font-size: 17px;
 }
 
-h1,
+/* h1,
 main {
   display: none;
-}
+} */
 
 form {
-  /* display: none; */
-  display: grid;
+  display: none;
+  /* display: grid; */
   grid-template-columns: 3fr 2fr;
   gap: var(--padding);
   padding: var(--padding);
