@@ -9,6 +9,7 @@
   --bg-color: #b5c99a;
   --text-color-dark: #414833;
   --text-color-light: #718355;
+  --error: #bc4749;
 
   /* SHADOWS */
   --shadow: 9.91px 9.91px 15px #a5b78c, -9.91px -9.91px 15px #c5dba8;
@@ -306,4 +307,76 @@ section.order-book {
   padding: 0 var(--half-padding) 0;
   height: var(--padding);
   font-size: 17px;
+}
+
+h1,
+main {
+  display: none;
+}
+
+form {
+  /* display: none; */
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--padding);
+  padding: var(--padding);
+
+  height: calc(100vh - var(--twice-padding));
+  box-shadow: var(--shadow);
+  border-radius: 10px;
+  color: var(--text-color-dark);
+
+  overflow: auto;
+}
+
+form .left,
+form .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+form label {
+  margin-top: var(--half-padding);
+}
+
+form input {
+  background-color: #e9f5db;
+  padding: 8px 14px;
+  font-size: 14px;
+  border: 1px solid var(--text-color-light);
+  border-radius: 3px;
+}
+
+form input:focus {
+  outline: 2px solid var(--text-color-light);
+}
+
+form input.invalid {
+  border: 1px solid var(--error);
+}
+
+form .error-msg {
+  color: var(--error);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+form .right {
+  gap: 40px;
+  align-items: center;
+}
+
+form .right > * {
+  width: 80%;
+}
+
+.right button {
+  height: var(--padding);
+}
+
+.right button:disabled {
+  box-shadow: var(--small-shadow);
+  cursor: default;
 }

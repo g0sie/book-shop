@@ -92,7 +92,7 @@ const books = [
   },
 ];
 
-const container = document.createElement("div");
+const container = document.getElementById("container");
 container.className = "container";
 document.body.append(container);
 
@@ -249,16 +249,137 @@ const addBookToBag = (book) => {
 orderBookFragment.append(bagElement);
 
 const summary = document.createElement("div");
+const summaryFragment = new DocumentFragment();
 summary.className = "summary";
-summary.innerHTML = "<button>Confirm order</button>";
 
 const totalElement = document.createElement("p");
 totalElement.className = "total";
 totalElement.innerText = total + "$";
-summary.prepend(totalElement);
+summaryFragment.append(totalElement);
+
+const confirmOrder = document.createElement("button");
+confirmOrder.innerHTML = "Confirm order";
+confirmOrder.onclick = () => {
+  main.style.display = "none";
+  h1.style.display = "none";
+  form.style.display = "grid";
+};
+summaryFragment.append(confirmOrder);
+
+summary.append(summaryFragment);
 orderBookFragment.append(summary);
 
 orderBook.append(orderBookFragment);
 mainFragment.append(orderBook);
 main.append(mainFragment);
 container.append(containerFragment);
+
+const form = document.getElementById("form");
+
+const handleName = (event) => {
+  const val = event.target.value.trim();
+  if (val.length < 4) {
+    inputName.className = "invalid";
+    nameError.innerText = "Too short name";
+  } else if (val.indexOf(" ") > -1) {
+    inputName.className = "invalid";
+    nameError.innerText = "Whitespaces are not allowed";
+  } else if (!/^[a-zA-Z]*$/.test(val)) {
+    inputName.className = "invalid";
+    nameError.innerText = "Only letters allowed";
+  } else {
+    inputName.className = "valid";
+    nameError.innerText = "";
+  }
+};
+const inputName = document.getElementById("name");
+const nameError = document.getElementById("error-msg-name");
+inputName.oninput = handleName;
+
+const handleSurname = (event) => {
+  const val = event.target.value.trim();
+  if (val.length < 5) {
+    inputSurname.className = "invalid";
+    surnameError.innerText = "Too short surname";
+  } else if (val.indexOf(" ") > -1) {
+    inputSurname.className = "invalid";
+    surnameError.innerText = "Whitespaces are not allowed";
+  } else if (!/^[a-zA-Z]*$/.test(val)) {
+    inputSurname.className = "invalid";
+    surnameError.innerText = "Only letters allowed";
+  } else {
+    inputSurname.className = "valid";
+    surnameError.innerText = "";
+  }
+};
+const inputSurname = document.getElementById("surname");
+const surnameError = document.getElementById("error-msg-surname");
+inputSurname.oninput = handleSurname;
+
+const handleDeliveryDate = (event) => {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(0, 0, 0);
+  console.log(tomorrow);
+  const val = new Date(event.target.value);
+  console.log(val);
+  if (val < tomorrow) {
+    inputDate.className = "invalid";
+    dateError.innerText = "The earliest delivery time can be tomorrow";
+  } else {
+    inputDate.className = "valid";
+    dateError.innerText = "";
+  }
+};
+const inputDate = document.getElementById("date");
+const dateError = document.getElementById("error-msg-date");
+inputDate.oninput = handleDeliveryDate;
+
+const handleStreet = (event) => {
+  const val = event.target.value.trim();
+  if (val.length < 5) {
+    inputStreet.className = "invalid";
+    streetError.innerText = "Too short street";
+  } else {
+    inputStreet.className = "valid";
+    streetError.innerText = "";
+  }
+};
+const inputStreet = document.getElementById("street");
+const streetError = document.getElementById("error-msg-street");
+inputStreet.oninput = handleStreet;
+
+const handleHouseNumber = (event) => {
+  const val = +event.target.value.trim();
+  if (val < 1) {
+    inputHouse.className = "invalid";
+    houseError.innerText = "Only positive numbers are allowed";
+  } else {
+    inputHouse.className = "valid";
+    houseError.innerText = "";
+  }
+};
+const inputHouse = document.getElementById("house");
+const houseError = document.getElementById("error-msg-house");
+inputHouse.oninput = handleHouseNumber;
+
+const handleFlatNumber = (event) => {
+  const val = event.target.value;
+  console.log(val);
+  if (!/^[1-9]/.test(val)) {
+    inputFlat.className = "invalid";
+    flateError.innerText = "Must start with a positive number";
+  } else if (!/[0-9]$/.test(val)) {
+    inputFlat.className = "invalid";
+    flateError.innerText = "Must end with a number";
+  } else if (!/^[-0-9]*$/.test(val)) {
+    inputFlat.className = "invalid";
+    flateError.innerText = "Only numbers and dashes allowed";
+  } else {
+    inputFlat.className = "valid";
+    flateError.innerText = "";
+  }
+};
+const inputFlat = document.getElementById("flat");
+const flateError = document.getElementById("error-msg-flat");
+inputFlat.oninput = handleFlatNumber;

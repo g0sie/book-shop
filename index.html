@@ -15,5 +15,78 @@
       rel="stylesheet"
     />
   </head>
-  <body></body>
+  <body>
+    <div class="container" id="container">
+      <form id="form">
+        <div class="left">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Michael"
+            minlength="4"
+            required
+          />
+          <p class="error-msg" id="error-msg-name"></p>
+          <label for="surname">Surname</label>
+          <input
+            type="text"
+            id="surname"
+            name="surname"
+            placeholder="Scarn"
+            minlength="5"
+            required
+          />
+          <p class="error-msg" id="error-msg-surname"></p>
+          <label for="date">Delivery date</label>
+          <input type="date" id="date" name="date" required />
+          <p class="error-msg" id="error-msg-date"></p>
+          <label for="street">Street</label>
+          <input
+            type="text"
+            id="street"
+            name="street"
+            placeholder="Slough Avenue"
+            required
+          />
+          <p id="error-msg-street" class="error-msg"></p>
+          <label for="house">House number</label>
+          <input
+            type="number"
+            id="house"
+            name="house"
+            placeholder="172"
+            required
+          />
+          <p id="error-msg-house" class="error-msg"></p>
+          <label for="flat">Flat number</label>
+          <input type="text" id="flat" name="flat" placeholder="5" required />
+          <p id="error-msg-flat" class="error-msg"></p>
+        </div>
+        <aside class="right">
+          <div class="payment">
+            <label for="payment">Payment type</label><br />
+            <input type="radio" id="cash" name="payment" checked />
+            <label for="cash">Cash</label>
+            <input type="radio" id="card" name="payment" />
+            <label for="card">Card</label>
+          </div>
+          <div class="gifts">
+            <label for="gift">Choose 2 gifts</label><br />
+            <input type="checkbox" name="gift" id="pack" />
+            <label for="gift">Pack as gift</label><br />
+            <input type="checkbox" name="gift" id="postcard" />
+            <label for="postcard">Add postcard</label><br />
+            <input type="checkbox" name="gift" id="discount" />
+            <label for="discount">Provide 2% discount to he next time</label
+            ><br />
+            <input type="checkbox" name="gift" id="pen" />
+            <label for="pen">Branded pen or pencil</label>
+          </div>
+          <button type="submit" disabled>Complete</button>
+        </aside>
+      </form>
+    </div>
+  </body>
 </html>
