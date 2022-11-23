@@ -138,10 +138,20 @@ const h2BookCatalog = document.createElement("h2");
 h2BookCatalog.innerText = "Book Catalog";
 bookCatalogFragment.append(h2BookCatalog);
 
+let draggingBook = null;
 books.forEach((book) => {
   const bookDiv = document.createElement("div");
   const bookFragment = new DocumentFragment();
   bookDiv.className = "book";
+  bookDiv.draggable = true;
+  bookDiv.ondragstart = () => {
+    draggingBook = book;
+    bookDiv.classList.add("dragging");
+  };
+  bookDiv.ondragend = () => {
+    draggingBook = null;
+    bookDiv.classList.remove("dragging");
+  };
 
   const image = document.createElement("div");
   image.className = "cover";
@@ -246,6 +256,15 @@ const addBookToBag = (book) => {
   bagFragment.append(bookInBag);
   bagElement.append(bagFragment);
 };
+
+bagElement.ondragover = (event) => {
+  event.preventDefault();
+};
+
+bagElement.ondrop = (event) => {
+  if (draggingBook) addBookToBag(draggingBook);
+};
+
 orderBookFragment.append(bagElement);
 
 const summary = document.createElement("div");

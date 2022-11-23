@@ -154,6 +154,12 @@ section::-webkit-scrollbar-thumb {
 
   display: grid;
   grid-template-columns: 1fr 1fr;
+
+  cursor: grab;
+}
+
+.book-catalog .book.dragging {
+  opacity: 0.5;
 }
 
 .book-catalog .book .cover {
