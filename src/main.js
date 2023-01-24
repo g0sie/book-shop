@@ -1,6 +1,6 @@
-import { books } from "./books.js";
 import { BookInfoPopup } from "./BookInfoPopup/BookInfoPopup.js";
 import { ExitButton } from "./ExitButton/ExitButton.js";
+import { BookCatalog, draggingBook } from "./BookCatalog/BookCatalog.js";
 
 const container = document.getElementById("container");
 container.className = "container";
@@ -19,84 +19,10 @@ containerFragment.append(main);
 const bookInfoPopup = BookInfoPopup();
 containerFragment.append(bookInfoPopup);
 
-// BOOK CATALOG SECTION
-const bookCatalog = document.createElement("section");
-bookCatalog.className = "book-catalog";
-const bookCatalogFragment = new DocumentFragment();
-
-const h2BookCatalog = document.createElement("h2");
-h2BookCatalog.innerText = "Book Catalog";
-bookCatalogFragment.append(h2BookCatalog);
-
-let draggingBook = null;
-books.forEach((book) => {
-  const bookDiv = document.createElement("div");
-  const bookFragment = new DocumentFragment();
-  bookDiv.className = "book";
-  bookDiv.draggable = true;
-  bookDiv.ondragstart = () => {
-    draggingBook = book;
-    bookDiv.classList.add("dragging");
-  };
-  bookDiv.ondragend = () => {
-    draggingBook = null;
-    bookDiv.classList.remove("dragging");
-  };
-
-  const image = document.createElement("div");
-  image.className = "cover";
-  image.style.backgroundImage = `url(${book.imageLink})`;
-  bookFragment.append(image);
-
-  const info = document.createElement("div");
-  const infoFragment = new DocumentFragment();
-  info.className = "info";
-
-  const author = document.createElement("p");
-  author.className = "author";
-  author.innerText = book.author;
-  infoFragment.append(author);
-
-  const title = document.createElement("h3");
-  title.innerText = book.title;
-  infoFragment.append(title);
-
-  const price = document.createElement("p");
-  price.className = "price";
-  price.innerText = `Price: $${book.price}`;
-  infoFragment.append(price);
-
-  const showMore = document.createElement("button");
-  showMore.className = "show-more";
-  showMore.innerText = "Show more";
-  showMore.onclick = (event) => {
-    if (!bookInfoPopup.classList.contains("popup--active")) {
-      bookInfoPopup.classList.add("popup--active");
-    }
-    document.querySelector(".popup__description").innerText = book.description;
-    const rect = bookInfoPopup.getBoundingClientRect();
-    bookInfoPopup.style.top = `min(100vh - ${rect.height}px, ${event.pageY}px)`;
-    bookInfoPopup.style.left = `min(100% - ${rect.width}px, ${event.pageX}px)`;
-  };
-  infoFragment.append(showMore);
-
-  const addToBag = document.createElement("button");
-  addToBag.className = "add-to-bag";
-  addToBag.innerText = "Add to bag";
-  addToBag.onclick = () => addBookToBag(book);
-  infoFragment.append(addToBag);
-
-  info.append(infoFragment);
-  bookFragment.append(info);
-  bookDiv.append(bookFragment);
-  bookCatalogFragment.append(bookDiv);
-});
-
-bookCatalog.append(bookCatalogFragment);
-mainFragment.append(bookCatalog);
+const bookCatalog = BookCatalog(bookInfoPopup);
+main.append(bookCatalog);
 
 // ORDER BOOK SECTION
-const bag = [];
 let total = 0;
 
 const orderBook = document.createElement("section");
@@ -111,8 +37,7 @@ const bagElement = document.createElement("div");
 const bagFragment = new DocumentFragment();
 bagElement.className = "bag";
 
-const addBookToBag = (book) => {
-  bag.push(book);
+export const addBookToBag = (book) => {
   total += book.price;
   totalElement.innerText = total + "$";
 
