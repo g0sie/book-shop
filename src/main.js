@@ -1,4 +1,6 @@
 import { books } from "./books.js";
+import { BookInfoPopup } from "./BookInfoPopup/BookInfoPopup.js";
+import { ExitButton } from "./ExitButton/ExitButton.js";
 
 const container = document.getElementById("container");
 container.className = "container";
@@ -14,28 +16,8 @@ const main = document.createElement("main");
 const mainFragment = new DocumentFragment();
 containerFragment.append(main);
 
-// POPUP
-const popup = document.createElement("div");
-popup.className = "popup";
-const popupFragment = new DocumentFragment();
-
-const exitButton = () => {
-  const button = document.createElement("div");
-  button.className = "exit";
-  button.innerHTML = '<div class="line"></div><div class="line"></div>';
-  return button;
-};
-
-const exitPopup = exitButton();
-exitPopup.onclick = () => popup.classList.remove("active");
-popupFragment.append(exitPopup);
-
-const popupDescription = document.createElement("p");
-popupDescription.className = "description";
-popupFragment.append(popupDescription);
-
-popup.append(popupFragment);
-containerFragment.append(popup);
+const bookInfoPopup = BookInfoPopup();
+containerFragment.append(bookInfoPopup);
 
 // BOOK CATALOG SECTION
 const bookCatalog = document.createElement("section");
@@ -88,11 +70,13 @@ books.forEach((book) => {
   showMore.className = "show-more";
   showMore.innerText = "Show more";
   showMore.onclick = (event) => {
-    if (!popup.classList.contains("active")) popup.classList.add("active");
-    popupDescription.innerText = book.description;
-    const rect = popup.getBoundingClientRect();
-    popup.style.top = `min(100vh - ${rect.height}px, ${event.pageY}px)`;
-    popup.style.left = `min(100% - ${rect.width}px, ${event.pageX}px)`;
+    if (!bookInfoPopup.classList.contains("active")) {
+      bookInfoPopup.classList.add("active");
+    }
+    document.querySelector(".description").innerText = book.description;
+    const rect = bookInfoPopup.getBoundingClientRect();
+    bookInfoPopup.style.top = `min(100vh - ${rect.height}px, ${event.pageY}px)`;
+    bookInfoPopup.style.left = `min(100% - ${rect.width}px, ${event.pageX}px)`;
   };
   infoFragment.append(showMore);
 
@@ -151,7 +135,7 @@ const addBookToBag = (book) => {
   price.innerText = "$" + book.price;
   bookFragment.append(price);
 
-  const deleteButton = exitButton();
+  const deleteButton = ExitButton();
   deleteButton.onclick = () => {
     bag.splice(bag.indexOf(book), 1);
     bookInBag.remove();

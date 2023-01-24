@@ -1,0 +1,29 @@
+.popup {
+  display: none;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 500px;
+  background-color: var(--text-color-light);
+  border-radius: 10px;
+}
+
+.popup.active {
+  display: block;
+
+  color: var(--bg-color);
+  padding: var(--padding);
+}
+
+.popup .exit {
+  position: absolute;
+  top: var(--padding);
+  right: var(--padding);
+}
+
+.popup .description {
+  margin-right: var(--padding);
+  margin-top: var(--padding);
+}
