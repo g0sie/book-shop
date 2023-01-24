@@ -49,10 +49,14 @@ const summary = document.createElement("div");
 const summaryFragment = new DocumentFragment();
 summary.className = "summary";
 
-export const totalPriceElement = document.createElement("p");
+const totalPriceElement = document.createElement("p");
 totalPriceElement.className = "total";
-totalPriceElement.innerText = "0$";
+totalPriceElement.innerText = " $";
 summaryFragment.append(totalPriceElement);
+
+export const totalPriceSpan = document.createElement("span");
+totalPriceSpan.innerText = "0";
+totalPriceElement.prepend(totalPriceSpan);
 
 const confirmOrder = document.createElement("button");
 confirmOrder.innerHTML = "Confirm order";
