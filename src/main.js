@@ -70,10 +70,10 @@ books.forEach((book) => {
   showMore.className = "show-more";
   showMore.innerText = "Show more";
   showMore.onclick = (event) => {
-    if (!bookInfoPopup.classList.contains("active")) {
-      bookInfoPopup.classList.add("active");
+    if (!bookInfoPopup.classList.contains("popup--active")) {
+      bookInfoPopup.classList.add("popup--active");
     }
-    document.querySelector(".description").innerText = book.description;
+    document.querySelector(".popup__description").innerText = book.description;
     const rect = bookInfoPopup.getBoundingClientRect();
     bookInfoPopup.style.top = `min(100vh - ${rect.height}px, ${event.pageY}px)`;
     bookInfoPopup.style.left = `min(100% - ${rect.width}px, ${event.pageX}px)`;

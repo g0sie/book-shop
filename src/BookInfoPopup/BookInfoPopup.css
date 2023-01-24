@@ -10,20 +10,20 @@
   border-radius: 10px;
 }
 
-.popup.active {
+.popup--active {
   display: block;
 
   color: var(--bg-color);
   padding: var(--padding);
 }
 
-.popup .exit {
+.popup__exit-btn {
   position: absolute;
   top: var(--padding);
   right: var(--padding);
 }
 
-.popup .description {
+.popup__description {
   margin-right: var(--padding);
   margin-top: var(--padding);
 }
