@@ -1,5 +1,5 @@
 import { books } from "../books.js";
-import { addBookToBag } from "../main.js";
+import { BookInfo } from "./BookInfo.js";
 
 export let draggingBook = null;
 
@@ -37,48 +37,4 @@ export function BookCatalog(bookInfoPopup) {
   });
 
   return bookCatalog;
-}
-
-function BookInfo(book, bookInfoPopup) {
-  const info = document.createElement("div");
-  info.className = "book__book-info";
-
-  const author = document.createElement("p");
-  author.className = "book-info__author";
-  author.innerText = book.author;
-  info.append(author);
-
-  const title = document.createElement("h3");
-  title.className = "book-info__title";
-  title.innerText = book.title;
-  info.append(title);
-
-  const price = document.createElement("p");
-  price.className = "book-info__price";
-  price.innerText = `Price: $${book.price}`;
-  info.append(price);
-
-  const showMore = document.createElement("button");
-  showMore.className = "book-info__btn";
-  showMore.innerText = "Show more";
-
-  showMore.onclick = (event) => {
-    if (!bookInfoPopup.classList.contains("popup--active")) {
-      bookInfoPopup.classList.add("popup--active");
-    }
-    bookInfoPopup.querySelector(".popup__description").innerText =
-      book.description;
-    const rect = bookInfoPopup.getBoundingClientRect();
-    bookInfoPopup.style.top = `min(100vh - ${rect.height}px, ${event.pageY}px)`;
-    bookInfoPopup.style.left = `min(100% - ${rect.width}px, ${event.pageX}px)`;
-  };
-  info.append(showMore);
-
-  const addToBag = document.createElement("button");
-  addToBag.className = "book-info__btn";
-  addToBag.innerText = "Add to bag";
-  addToBag.onclick = () => addBookToBag(book);
-  info.append(addToBag);
-
-  return info;
 }
