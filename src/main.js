@@ -1,6 +1,6 @@
 import { BookInfoPopup } from "./BookInfoPopup/BookInfoPopup.js";
-import { ExitButton } from "./ExitButton/ExitButton.js";
 import { BookCatalog, draggingBook } from "./BookCatalog/BookCatalog.js";
+import { addBookToBag } from "./addBookToBag.js";
 
 const container = document.getElementById("container");
 container.className = "container";
@@ -23,7 +23,6 @@ const bookCatalog = BookCatalog(bookInfoPopup);
 main.append(bookCatalog);
 
 // ORDER BOOK SECTION
-let total = 0;
 
 const orderBook = document.createElement("section");
 const orderBookFragment = new DocumentFragment();
@@ -33,46 +32,8 @@ const h2OrderBook = document.createElement("h2");
 h2OrderBook.innerText = "Order Book";
 orderBookFragment.append(h2OrderBook);
 
-const bagElement = document.createElement("div");
-const bagFragment = new DocumentFragment();
+export const bagElement = document.createElement("div");
 bagElement.className = "bag";
-
-export const addBookToBag = (book) => {
-  total += book.price;
-  totalElement.innerText = total + "$";
-
-  const bookInBag = document.createElement("div");
-  bookInBag.className = "book";
-  const bookFragment = new DocumentFragment();
-
-  const author = document.createElement("p");
-  author.className = "author";
-  author.innerText = book.author;
-  bookFragment.append(author);
-
-  const title = document.createElement("p");
-  title.className = "title";
-  title.innerText = book.title;
-  bookFragment.append(title);
-
-  const price = document.createElement("p");
-  price.className = "price";
-  price.innerText = "$" + book.price;
-  bookFragment.append(price);
-
-  const deleteButton = ExitButton();
-  deleteButton.onclick = () => {
-    bag.splice(bag.indexOf(book), 1);
-    bookInBag.remove();
-    total -= book.price;
-    totalElement.innerText = total + "$";
-  };
-  bookFragment.append(deleteButton);
-
-  bookInBag.append(bookFragment);
-  bagFragment.append(bookInBag);
-  bagElement.append(bagFragment);
-};
 
 bagElement.ondragover = (event) => {
   event.preventDefault();
@@ -88,10 +49,10 @@ const summary = document.createElement("div");
 const summaryFragment = new DocumentFragment();
 summary.className = "summary";
 
-const totalElement = document.createElement("p");
-totalElement.className = "total";
-totalElement.innerText = total + "$";
-summaryFragment.append(totalElement);
+export const totalPriceElement = document.createElement("p");
+totalPriceElement.className = "total";
+totalPriceElement.innerText = "0$";
+summaryFragment.append(totalPriceElement);
 
 const confirmOrder = document.createElement("button");
 confirmOrder.innerHTML = "Confirm order";

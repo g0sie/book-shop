@@ -1,4 +1,4 @@
-import { addBookToBag } from "../main.js";
+import { addBookToBag } from "../addBookToBag.js";
 
 export function BookInfo(book, bookInfoPopup) {
   const info = document.createElement("div");
