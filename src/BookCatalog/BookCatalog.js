@@ -13,22 +13,22 @@ export function BookCatalog(bookInfoPopup) {
 
   books.forEach((book) => {
     const bookDiv = document.createElement("div");
-    bookDiv.className = "book";
+    bookDiv.className = "book-catalog__book";
     bookDiv.draggable = true;
     bookCatalog.append(bookDiv);
 
     bookDiv.ondragstart = () => {
       draggingBook = book;
-      bookDiv.classList.add("dragging");
+      bookDiv.classList.add(".book-catalog__book--dragging");
     };
 
     bookDiv.ondragend = () => {
       draggingBook = null;
-      bookDiv.classList.remove("dragging");
+      bookDiv.classList.remove(".book-catalog__book--dragging");
     };
 
     const image = document.createElement("div");
-    image.className = "cover";
+    image.className = "book__cover";
     image.style.backgroundImage = `url(${book.imageLink})`;
     bookDiv.append(image);
 
@@ -41,24 +41,25 @@ export function BookCatalog(bookInfoPopup) {
 
 function BookInfo(book, bookInfoPopup) {
   const info = document.createElement("div");
-  info.className = "info";
+  info.className = "book__book-info";
 
   const author = document.createElement("p");
-  author.className = "author";
+  author.className = "book-info__author";
   author.innerText = book.author;
   info.append(author);
 
   const title = document.createElement("h3");
+  title.className = "book-info__title";
   title.innerText = book.title;
   info.append(title);
 
   const price = document.createElement("p");
-  price.className = "price";
+  price.className = "book-info__price";
   price.innerText = `Price: $${book.price}`;
   info.append(price);
 
   const showMore = document.createElement("button");
-  showMore.className = "show-more";
+  showMore.className = "book-info__btn";
   showMore.innerText = "Show more";
 
   showMore.onclick = (event) => {
@@ -74,7 +75,7 @@ function BookInfo(book, bookInfoPopup) {
   info.append(showMore);
 
   const addToBag = document.createElement("button");
-  addToBag.className = "add-to-bag";
+  addToBag.className = "book-info__btn";
   addToBag.innerText = "Add to bag";
   addToBag.onclick = () => addBookToBag(book);
   info.append(addToBag);
