@@ -1,6 +1,6 @@
 import { BookInfoPopup } from "./BookInfoPopup/BookInfoPopup.js";
-import { BookCatalog, draggingBook } from "./BookCatalog/BookCatalog.js";
-import { addBookToBag } from "./addBookToBag.js";
+import { BookCatalog } from "./BookCatalog/BookCatalog.js";
+import { Bag } from "./OrderBook/Bag.js";
 
 const container = document.getElementById("container");
 container.className = "container";
@@ -32,18 +32,8 @@ const h2OrderBook = document.createElement("h2");
 h2OrderBook.innerText = "Order Book";
 orderBookFragment.append(h2OrderBook);
 
-export const bagElement = document.createElement("div");
-bagElement.className = "bag";
-
-bagElement.ondragover = (event) => {
-  event.preventDefault();
-};
-
-bagElement.ondrop = (event) => {
-  if (draggingBook) addBookToBag(draggingBook);
-};
-
-orderBookFragment.append(bagElement);
+export const bag = Bag();
+orderBookFragment.append(bag);
 
 const summary = document.createElement("div");
 const summaryFragment = new DocumentFragment();

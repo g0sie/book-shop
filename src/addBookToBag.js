@@ -1,4 +1,4 @@
-import { totalPriceSpan, bagElement } from "./main.js";
+import { totalPriceSpan, bag } from "./main.js";
 import { Book } from "./OrderBook/Book.js";
 
 export const addBookToBag = (book) => {
@@ -6,5 +6,5 @@ export const addBookToBag = (book) => {
   totalPriceSpan.innerText = totalPrice;
 
   const bookDiv = Book(book);
-  bagElement.append(bookDiv);
+  bag.append(bookDiv);
 };
