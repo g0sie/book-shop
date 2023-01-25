@@ -7,6 +7,6 @@ export const addBookToBag = (book) => {
   totalPriceSpan.innerText = totalPrice;
 
   const bookDiv = Book(book);
-  const bag = orderBookSection.querySelector(".bag");
+  const bag = orderBookSection.querySelector(".order-book__bag");
   bag.append(bookDiv);
 };

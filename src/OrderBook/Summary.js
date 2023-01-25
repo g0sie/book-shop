@@ -2,7 +2,7 @@ import { goToFormPage } from "../main.js";
 
 export function Summary() {
   const summary = document.createElement("div");
-  summary.className = "summary";
+  summary.className = "order-book__summary";
 
   const totalPrice = TotalPrice();
   summary.append(totalPrice);
@@ -15,7 +15,7 @@ export function Summary() {
 
 function TotalPrice() {
   const totalPriceElement = document.createElement("p");
-  totalPriceElement.className = "total";
+  totalPriceElement.className = "summary__total-price";
   totalPriceElement.innerText = " $";
 
   const totalPriceSpan = document.createElement("span");
@@ -28,6 +28,7 @@ function TotalPrice() {
 
 function ConfirmOrderBtn() {
   const btn = document.createElement("button");
+  btn.className = "summary__confirm-btn";
   btn.innerHTML = "Confirm order";
   btn.onclick = goToFormPage;
 
