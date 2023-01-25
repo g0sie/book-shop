@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="src/BookInfoPopup/BookInfoPopup.css" />
     <link rel="stylesheet" href="src/BookCatalog/BookCatalog.css" />
     <link rel="stylesheet" href="src/OrderBook/OrderBook.css" />
+    <link rel="stylesheet" href="src/DeliveryForm/form.css" />
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,10 +26,11 @@
   </head>
   <body>
     <div class="container" id="container">
-      <form id="form">
-        <div class="left">
-          <label for="name">Name</label>
+      <form id="form" class="delivery-form">
+        <div class="delivery-form__left-side">
+          <label for="name" class="left-side__label">Name</label>
           <input
+            class="left-side__input"
             type="text"
             id="name"
             name="name"
@@ -37,8 +39,10 @@
             required
           />
           <p class="error-msg" id="error-msg-name"></p>
-          <label for="surname">Surname</label>
+
+          <label for="surname" class="left-side__label">Surname</label>
           <input
+            class="left-side__input"
             type="text"
             id="surname"
             name="surname"
@@ -47,53 +51,115 @@
             required
           />
           <p class="error-msg" id="error-msg-surname"></p>
-          <label for="date">Delivery date</label>
-          <input type="date" id="date" name="date" required />
-          <p class="error-msg" id="error-msg-date"></p>
-          <label for="street">Street</label>
+
+          <label for="date" class="left-side__label">Delivery date</label>
           <input
+            type="date"
+            id="date"
+            name="date"
+            class="left-side__input"
+            required
+          />
+          <p class="error-msg" id="error-msg-date"></p>
+
+          <label for="street" class="left-side__label">Street</label>
+          <input
+            class="left-side__input"
             type="text"
             id="street"
             name="street"
             placeholder="Slough Avenue"
             required
           />
-          <p id="error-msg-street" class="error-msg"></p>
-          <label for="house">House number</label>
+          <p class="error-msg" id="error-msg-street"></p>
+
+          <label for="house" class="left-side__label">House number</label>
           <input
+            class="left-side__input"
             type="number"
             id="house"
             name="house"
             placeholder="172"
             required
           />
-          <p id="error-msg-house" class="error-msg"></p>
-          <label for="flat">Flat number</label>
-          <input type="text" id="flat" name="flat" placeholder="5" required />
-          <p id="error-msg-flat" class="error-msg"></p>
+          <p class="error-msg" id="error-msg-house"></p>
+
+          <label for="flat" class="left-side__label">Flat number</label>
+          <input
+            class="left-side__input"
+            type="text"
+            id="flat"
+            name="flat"
+            placeholder="5"
+            required
+          />
+          <p class="error-msg" id="error-msg-flat"></p>
         </div>
-        <aside class="right">
+
+        <aside class="delivery-form__right-side">
           <div class="payment">
             <label for="payment">Payment type</label><br />
-            <input type="radio" id="cash" name="payment" checked />
+
+            <input
+              class="payment__radio"
+              type="radio"
+              id="cash"
+              name="payment"
+              checked
+            />
             <label for="cash">Cash</label><br />
-            <input type="radio" id="card" name="payment" />
+
+            <input
+              class="payment__radio"
+              type="radio"
+              id="card"
+              name="payment"
+            />
             <label for="card">Card</label>
           </div>
-          <div class="gifts valid">
+          <div class="gifts gifts--valid">
             <label for="gift">Choose 2 gifts</label><br />
-            <input type="checkbox" name="gift" id="pack" />
+            <input
+              class="gifts__checkbox"
+              type="checkbox"
+              name="gift"
+              id="pack"
+            />
+
             <label for="pack">Pack as gift</label><br />
-            <input type="checkbox" name="gift" id="postcard" />
+            <input
+              class="gifts__checkbox"
+              type="checkbox"
+              name="gift"
+              id="postcard"
+            />
+
             <label for="postcard">Add postcard</label><br />
-            <input type="checkbox" name="gift" id="discount" />
+            <input
+              class="gifts__checkbox"
+              type="checkbox"
+              name="gift"
+              id="discount"
+            />
+
             <label for="discount">Provide 2% discount to the next time</label
             ><br />
-            <input type="checkbox" name="gift" id="pen" />
+            <input
+              class="gifts__checkbox"
+              type="checkbox"
+              name="gift"
+              id="pen"
+            />
+
             <label for="pen">Branded pen or pencil</label>
             <p id="error-msg-gifts" class="error-msg"></p>
           </div>
-          <button id="complete" type="button" class="btn" disabled>
+          <button
+            id="complete-btn"
+            type="button"
+            class="right-side__btn btn"
+            disabled
+          >
             Complete
           </button>
         </aside>

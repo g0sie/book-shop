@@ -1,4 +1,4 @@
-const leftInputs = document.querySelectorAll("form .left input");
+const leftInputs = document.querySelectorAll(".left-side__input");
 leftInputs.forEach((input) => (input.onblur = handleEmptyInputs));
 
 const nameInput = document.getElementById("name");
@@ -28,7 +28,7 @@ flatInput.oninput = validateFlatNumber;
 const giftCheckboxes = document.querySelectorAll(".gifts input");
 giftCheckboxes.forEach((checkbox) => (checkbox.oninput = validateGifts));
 
-const completeButton = document.getElementById("complete");
+const completeButton = document.getElementById("complete-btn");
 completeButton.onclick = goToOrderCreatedPage;
 
 // VALIDATORS
@@ -36,24 +36,26 @@ completeButton.onclick = goToOrderCreatedPage;
 function handleEmptyInputs(event) {
   const inputElem = event.target;
   if (inputElem.value === "") {
-    inputElem.className = "invalid";
+    inputElem.classList.remove("left-side__input--valid");
+    inputElem.classList.add("left-side__input--invalid");
     inputElem.nextElementSibling.innerText = "This field can't be empty";
   }
 }
 
 function validateNameInput(event) {
   const name = event.target.value.trim();
+  nameInput.classList.remove("left-side__input--valid");
+  nameInput.classList.add("left-side__input--invalid");
+
   if (name.length < 4) {
-    nameInput.className = "invalid";
     nameError.innerText = "Too short name";
   } else if (name.indexOf(" ") > -1) {
-    nameInput.className = "invalid";
     nameError.innerText = "Whitespaces are not allowed";
   } else if (!/^[a-zA-Z]*$/.test(name)) {
-    nameInput.className = "invalid";
     nameError.innerText = "Only letters allowed";
   } else {
-    nameInput.className = "valid";
+    nameInput.classList.remove("left-side__input--invalid");
+    nameInput.classList.add("left-side__input--valid");
     nameError.innerText = "";
   }
   tryToEnableCompleteBtn();
@@ -61,17 +63,18 @@ function validateNameInput(event) {
 
 function validateSurnameInput(event) {
   const surname = event.target.value.trim();
+  surnameInput.classList.remove("left-side__input--valid");
+  surnameInput.classList.add("left-side__input--invalid");
+
   if (surname.length < 5) {
-    surnameInput.className = "invalid";
     surnameError.innerText = "Too short surname";
   } else if (surname.indexOf(" ") > -1) {
-    surnameInput.className = "invalid";
     surnameError.innerText = "Whitespaces are not allowed";
   } else if (!/^[a-zA-Z]*$/.test(surname)) {
-    surnameInput.className = "invalid";
     surnameError.innerText = "Only letters allowed";
   } else {
-    surnameInput.className = "valid";
+    surnameInput.classList.remove("left-side__input--invalid");
+    surnameInput.classList.add("left-side__input--valid");
     surnameError.innerText = "";
   }
   tryToEnableCompleteBtn();
@@ -85,10 +88,12 @@ function validateDeliveryDate(event) {
   const givenDate = new Date(event.target.value);
 
   if (givenDate < tomorrow) {
-    dateInput.className = "invalid";
+    dateInput.classList.remove("left-side__input--valid");
+    dateInput.classList.add("left-side__input--invalid");
     dateError.innerText = "The earliest possible date is tomorrow";
   } else {
-    dateInput.className = "valid";
+    dateInput.classList.remove("left-side__input--invalid");
+    dateInput.classList.add("left-side__input--valid");
     dateError.innerText = "";
   }
   tryToEnableCompleteBtn();
@@ -97,10 +102,12 @@ function validateDeliveryDate(event) {
 function validateStreet(event) {
   const street = event.target.value.trim();
   if (street.length < 5) {
-    streetInput.className = "invalid";
+    streetInput.classList.remove("left-side__input--valid");
+    streetInput.classList.add("left-side__input--invalid");
     streetError.innerText = "Too short street";
   } else {
-    streetInput.className = "valid";
+    streetInput.classList.remove("left-side__input--invalid");
+    streetInput.classList.add("left-side__input--valid");
     streetError.innerText = "";
   }
   tryToEnableCompleteBtn();
@@ -109,10 +116,12 @@ function validateStreet(event) {
 function validateHouseNumber(event) {
   const houseNumber = +event.target.value.trim();
   if (houseNumber < 1) {
-    houseInput.className = "invalid";
+    houseInput.classList.remove("left-side__input--valid");
+    houseInput.classList.add("left-side__input--invalid");
     houseError.innerText = "Only positive numbers are allowed";
   } else {
-    houseInput.className = "valid";
+    houseInput.classList.remove("left-side__input--invalid");
+    houseInput.classList.add("left-side__input--valid");
     houseError.innerText = "";
   }
   tryToEnableCompleteBtn();
@@ -120,17 +129,18 @@ function validateHouseNumber(event) {
 
 function validateFlatNumber(event) {
   const flatNumber = event.target.value;
+  flatInput.classList.remove("left-side__input--valid");
+  flatInput.classList.add("left-side__input--invalid");
+
   if (!/^[1-9]/.test(flatNumber)) {
-    flatInput.className = "invalid";
     flateError.innerText = "Must start with a positive number";
   } else if (!/[0-9]$/.test(flatNumber)) {
-    flatInput.className = "invalid";
     flateError.innerText = "Must end with a number";
   } else if (!/^[-0-9]*$/.test(flatNumber)) {
-    flatInput.className = "invalid";
     flateError.innerText = "Only numbers and dashes are allowed";
   } else {
-    flatInput.className = "valid";
+    flatInput.classList.remove("left-side__input--invalid");
+    flatInput.classList.add("left-side__input--valid");
     flateError.innerText = "";
   }
   tryToEnableCompleteBtn();
@@ -140,27 +150,32 @@ let checkedGiftsCount = 0;
 function validateGifts(event) {
   const MAX = 2;
   const errorMsg = document.getElementById("error-msg-gifts");
-  const parent = event.target.parentElement;
+  const giftsElement = event.target.parentElement;
 
   checkedGiftsCount += event.target.checked ? 1 : -1;
   if (checkedGiftsCount > MAX) {
-    parent.classList.replace("valid", "invalid");
+    giftsElement.classList.replace("gifts--valid", "gifts--invalid");
     errorMsg.innerText = "You can choose at most two gifts";
   } else {
-    parent.classList.replace("invalid", "valid");
+    giftsElement.classList.replace("gifts--invalid", "gifts--valid");
     errorMsg.innerText = "";
   }
   tryToEnableCompleteBtn();
 }
 
 function isFormValid() {
-  return [...leftInputs, giftCheckboxes[0].parentElement].every((elem) =>
-    elem.classList.contains("valid")
+  const isLeftSideValid = [...leftInputs].every((input) =>
+    input.classList.contains("left-side__input--valid")
   );
+
+  const areGiftCheckboxesValid =
+    document.querySelector(".gifts--valid") !== null;
+
+  return isLeftSideValid && areGiftCheckboxesValid;
 }
 
 function tryToEnableCompleteBtn() {
-  const completeButton = document.getElementById("complete");
+  const completeButton = document.getElementById("complete-btn");
   completeButton.disabled = !isFormValid();
 }
 
@@ -168,14 +183,16 @@ function goToOrderCreatedPage() {
   const successMsg = document.createElement("div");
   successMsg.className = "order-completed";
   successMsg.innerHTML = `
-      <h2>The order has been created</h2>
+      <h2 class="font-weight-600">The order has been created</h2>
       <p>The delivery address is 
-        <span>
+        <span class="font-weight-600">
           ${streetInput.value} ${houseInput.value}/${flatInput.value}
         </span>
       </p>
       <p>Customer
-        <span>${nameInput.value} ${surnameInput.value}</span>
+        <span class="font-weight-600">
+          ${nameInput.value} ${surnameInput.value}
+        </span>
       </p>
       `;
   document.querySelector(".container").append(successMsg);
