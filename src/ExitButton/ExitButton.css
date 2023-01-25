@@ -1,0 +1,31 @@
+.exit-btn {
+  position: relative;
+
+  height: 20px;
+  width: 20px;
+
+  cursor: pointer;
+}
+
+.exit-btn__line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+
+  height: 2px;
+  width: 20px;
+  background-color: var(--bg-color);
+}
+
+.exit-btn__line:nth-child(1) {
+  rotate: 45deg;
+}
+
+.exit-btn__line:nth-child(2) {
+  rotate: -45deg;
+}
+
+.exit-btn:hover .exit-btn__line {
+  background-color: white;
+}
