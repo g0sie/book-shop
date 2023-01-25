@@ -1,8 +1,8 @@
 import { BookInfoPopup } from "./BookInfoPopup/BookInfoPopup.js";
 import { BookCatalog } from "./BookCatalog/BookCatalog.js";
-import { Bag } from "./OrderBook/Bag.js";
+import { OrderBookSection } from "./OrderBook/OrderBookSection.js";
 
-const container = document.getElementById("container");
+export const container = document.getElementById("container");
 container.className = "container";
 document.body.append(container);
 
@@ -13,8 +13,15 @@ h1.append("book shop");
 containerFragment.append(h1);
 
 const main = document.createElement("main");
-const mainFragment = new DocumentFragment();
 containerFragment.append(main);
+
+const form = document.querySelector("form");
+
+export function goToFormPage() {
+  main.style.display = "none";
+  h1.style.display = "none";
+  form.style.display = "grid";
+}
 
 const bookInfoPopup = BookInfoPopup();
 containerFragment.append(bookInfoPopup);
@@ -22,47 +29,9 @@ containerFragment.append(bookInfoPopup);
 const bookCatalog = BookCatalog(bookInfoPopup);
 main.append(bookCatalog);
 
-// ORDER BOOK SECTION
+export const orderBookSection = OrderBookSection();
+main.append(orderBookSection);
 
-const orderBook = document.createElement("section");
-const orderBookFragment = new DocumentFragment();
-orderBook.className = "order-book";
-
-const h2OrderBook = document.createElement("h2");
-h2OrderBook.innerText = "Order Book";
-orderBookFragment.append(h2OrderBook);
-
-export const bag = Bag();
-orderBookFragment.append(bag);
-
-const summary = document.createElement("div");
-const summaryFragment = new DocumentFragment();
-summary.className = "summary";
-
-const totalPriceElement = document.createElement("p");
-totalPriceElement.className = "total";
-totalPriceElement.innerText = " $";
-summaryFragment.append(totalPriceElement);
-
-export const totalPriceSpan = document.createElement("span");
-totalPriceSpan.innerText = "0";
-totalPriceElement.prepend(totalPriceSpan);
-
-const confirmOrder = document.createElement("button");
-confirmOrder.innerHTML = "Confirm order";
-confirmOrder.onclick = () => {
-  main.style.display = "none";
-  h1.style.display = "none";
-  form.style.display = "grid";
-};
-summaryFragment.append(confirmOrder);
-
-summary.append(summaryFragment);
-orderBookFragment.append(summary);
-
-orderBook.append(orderBookFragment);
-mainFragment.append(orderBook);
-main.append(mainFragment);
 container.append(containerFragment);
 
 // FORM

@@ -1,5 +1,5 @@
-import { totalPriceSpan } from "../main.js";
 import { ExitButton } from "../ExitButton/ExitButton.js";
+import { orderBookSection } from "../main.js";
 
 export function Book(book) {
   const bookDiv = document.createElement("div");
@@ -30,6 +30,8 @@ export function Book(book) {
 }
 
 function RemoveBookBtn(bookDiv, book) {
+  const totalPriceSpan = orderBookSection.querySelector("#total-price");
+
   const removeBook = () => {
     bookDiv.remove();
     const totalPrice = parseInt(totalPriceSpan.innerText) - book.price;
