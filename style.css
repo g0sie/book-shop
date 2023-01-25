@@ -39,22 +39,6 @@
   background: var(--text-color-light);
 }
 
-button {
-  color: var(--text-color-dark);
-  font-weight: 500;
-  font-family: "Poppins", sans-serif;
-
-  background: var(--bg-color);
-  box-shadow: var(--small-shadow);
-
-  border: none;
-  cursor: pointer;
-}
-
-button:active {
-  box-shadow: var(--small-shadow-inset);
-}
-
 body {
   background-color: var(--bg-color);
   font-family: "Poppins", sans-serif;
@@ -72,7 +56,7 @@ body {
   color: var(--text-color-light);
 }
 
-h1 {
+.title {
   height: 100px;
   display: flex;
   align-items: center;
@@ -85,14 +69,14 @@ h1 {
   font-weight: 600;
 }
 
-main {
+.main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: calc(100vh - 100px - 3 * var(--padding));
   gap: var(--padding);
 }
 
-section {
+.section {
   border-radius: 10px;
   background: var(--bg-color);
   box-shadow: var(--shadow);
@@ -102,18 +86,34 @@ section {
   overflow: auto;
 }
 
-section h2 {
+.section__title {
   text-align: center;
   text-shadow: var(--small-shadow);
   font-weight: 500;
 }
 
-section::-webkit-scrollbar-track {
+.section::-webkit-scrollbar-track {
   border-radius: 0 10px 10px 0;
 }
 
-section::-webkit-scrollbar-thumb {
+.section::-webkit-scrollbar-thumb {
   border-radius: 0 10px 10px 0;
+}
+
+.btn {
+  color: var(--text-color-dark);
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+
+  background: var(--bg-color);
+  box-shadow: var(--small-shadow);
+
+  border: none;
+  cursor: pointer;
+}
+
+.btn:active {
+  box-shadow: var(--small-shadow-inset);
 }
 
 form {

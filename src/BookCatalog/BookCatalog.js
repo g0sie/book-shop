@@ -5,11 +5,12 @@ export let draggingBook = null;
 
 export function BookCatalog(bookInfoPopup) {
   const bookCatalog = document.createElement("section");
-  bookCatalog.className = "book-catalog";
+  bookCatalog.className = "book-catalog section";
 
-  const h2BookCatalog = document.createElement("h2");
-  h2BookCatalog.innerText = "Book Catalog";
-  bookCatalog.append(h2BookCatalog);
+  const sectionTitle = document.createElement("h2");
+  sectionTitle.className = "section__title";
+  sectionTitle.innerText = "Book Catalog";
+  bookCatalog.append(sectionTitle);
 
   books.forEach((book) => {
     const bookDiv = document.createElement("div");

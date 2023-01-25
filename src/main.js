@@ -9,19 +9,13 @@ document.body.append(container);
 const containerFragment = new DocumentFragment();
 
 const h1 = document.createElement("h1");
+h1.className = "title";
 h1.append("book shop");
 containerFragment.append(h1);
 
 const main = document.createElement("main");
+main.className = "main";
 containerFragment.append(main);
-
-const form = document.querySelector("form");
-
-export function goToFormPage() {
-  main.style.display = "none";
-  h1.style.display = "none";
-  form.style.display = "grid";
-}
 
 const bookInfoPopup = BookInfoPopup();
 containerFragment.append(bookInfoPopup);
@@ -33,6 +27,14 @@ export const orderBookSection = OrderBookSection();
 main.append(orderBookSection);
 
 container.append(containerFragment);
+
+const form = document.querySelector("form");
+
+export function goToFormPage() {
+  main.style.display = "none";
+  h1.style.display = "none";
+  form.style.display = "grid";
+}
 
 // FORM
 

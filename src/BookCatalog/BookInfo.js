@@ -43,7 +43,7 @@ function ShowMoreBtn(book, bookInfoPopup) {
   };
 
   const btn = document.createElement("button");
-  btn.className = "book-info__btn";
+  btn.className = "book-info__btn btn";
   btn.innerText = "Show more";
 
   btn.onclick = showPopup;
@@ -53,7 +53,7 @@ function ShowMoreBtn(book, bookInfoPopup) {
 
 function AddToBagBtn(book) {
   const btn = document.createElement("button");
-  btn.className = "book-info__btn";
+  btn.className = "book-info__btn btn";
   btn.innerText = "Add to bag";
 
   btn.onclick = () => addBookToBag(book);

@@ -28,7 +28,7 @@ function TotalPrice() {
 
 function ConfirmOrderBtn() {
   const btn = document.createElement("button");
-  btn.className = "summary__confirm-btn";
+  btn.className = "summary__confirm-btn btn";
   btn.innerHTML = "Confirm order";
   btn.onclick = goToFormPage;
 
