@@ -8,5 +8,6 @@ The project simulates an online book shop. It was made for [RS School - JS/Front
 
 ## Acknowledgements
 
+- Here's [a tool for making neuromorphism designs.](https://neumorphism.io/)
 - Here's where I got a [favicon](https://uxwing.com/study-icon/) from.
 - And here's where I learned [how to build drag & drop](https://youtu.be/jfYWwQrtzzY) from.
